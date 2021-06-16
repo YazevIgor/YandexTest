@@ -10,8 +10,18 @@ export const libraryApi = {
             return response.data
         })
     },
-    DataBooks() {
-        return instance.get(`developers/api`).then(response => {
+    DataBooksWorks(worksID) {
+        return instance.get(`${worksID}.json`).then(response => {
+            return response.data
+        })
+    },
+    DataBooksEditions(editionsID) {
+        return instance.get(`${editionsID}.json`).then(response => {
+            return response.data
+        })
+    },
+    DataBooksISBN(isbn) {
+        return instance.get(`isbn/${isbn}`).then(response => {
             return response.data
         })
     }

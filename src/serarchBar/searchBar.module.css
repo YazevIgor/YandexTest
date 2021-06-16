@@ -1,0 +1,23 @@
+.wrapper {
+    display: grid;
+    grid-template-columns: 600px 1fr;
+    z-index: 1;
+}
+
+.cover {
+    display: grid;
+
+    grid-auto-rows: auto;
+    grid-template-columns: 50px 600px;
+    margin-top: 1em;
+    background-color: #c9c7c8;
+}
+
+.cover img {
+    width: 40px;
+    height: 60px;
+
+}
+.author {
+    grid-column: 2;
+}
