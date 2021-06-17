@@ -24,5 +24,10 @@ export const libraryApi = {
         return instance.get(`isbn/${isbn}`).then(response => {
             return response.data
         })
+    },
+    DataAuthor(id) {
+        return instance.get(`${id}.json`).then(response => {
+            return response.data
+        })
     }
 }

@@ -7,12 +7,15 @@ let initialState = {
     completed: false,
     idSelectedBook: null,
     dataSelectedBook: {},
+    author: {}
 };
 
 const searchBarReducer = (state = initialState, action) => {
     switch (action.type){
         case "ADD-BOOKS":
             return {...state, books: action.books.docs};
+        case "ADD-AUTHOR":
+            return {...state, author: action.author};
         case "ADD-DATA-BOOK":
             return {...state, dataSelectedBook: action.data};
         case "UPDATE-REQUEST-DATA":
@@ -39,6 +42,9 @@ export const updateModalActive = (bool) => {
 const addBooks = (books) => {
     return {type: "ADD-BOOKS", books: books}
 }
+const addAuthor = (author) => {
+    return {type: "ADD-AUTHOR", author: author}
+}
 
 const addDataBook = (data) => {
     return {type: "ADD-DATA-BOOK", data: data}
@@ -60,7 +66,10 @@ export const getDataBook = (type, id) => {
             return (dispatch) => {
                 libraryApi.DataBooksWorks(id).then(data => {
                     dispatch(addDataBook(data));
-                    dispatch(updateModalActive(true))
+                    libraryApi.DataAuthor(data.authors[0].author.key).then(dataAuthor => {
+                        dispatch(addAuthor(dataAuthor));
+                        dispatch(updateModalActive(true));
+                    })
 
                 })
             }
@@ -68,14 +77,20 @@ export const getDataBook = (type, id) => {
             return (dispatch) => {
                 libraryApi.DataBooksEditions(id).then(data => {
                     dispatch(addDataBook(data));
-                    dispatch(updateModalActive(true))
+                    libraryApi.DataAuthor(data.authors[0].author.key).then(dataAuthor => {
+                        dispatch(addAuthor(dataAuthor));
+                        dispatch(updateModalActive(true));
+                    })
                 })
             }
         case 'isbn':
             return (dispatch) => {
                 libraryApi.DataBooksISBN(id).then(data => {
                     dispatch(addDataBook(data));
-                    dispatch(updateModalActive(true))
+                    libraryApi.DataAuthor(data.authors[0].author.key).then(dataAuthor => {
+                        dispatch(addAuthor(dataAuthor));
+                        dispatch(updateModalActive(true));
+                    })
                 })
             }
         default: return 0;

@@ -14,7 +14,8 @@ class SearchBarContainer extends React.Component {
                           getDataBook={this.props.getDataBook}
                           dataSelectedBook={this.props.dataSelectedBook}
                           modalActive={this.props.modalActive}
-                          updateModalActive={this.props.updateModalActive}/>}
+                          updateModalActive={this.props.updateModalActive}
+                          dataAuthor={this.props.author} />}
 }
 
 const mapStateToProps = (state) => {
@@ -23,7 +24,8 @@ const mapStateToProps = (state) => {
         requestText: state.searchBar.requestText,
         completed: state.searchBar.completed,
         dataSelectedBook: state.searchBar.dataSelectedBook,
-        modalActive: state.searchBar.modalActive
+        modalActive: state.searchBar.modalActive,
+        author: state.searchBar.author
     }
 }
 

@@ -3,12 +3,13 @@ import classes from "./searchBar.module.css"
 import ModalWindow from "../ModalWindow/modalWindow";
 
 const SearchBar = (props) => {
+    let [dataBook, setDataBook] = useState();
     let updateRequest = (event) => {
         props.updateRequestData(event.target.value);
     }
 
     const modalDataImport = (elm) => {
-
+        setDataBook(elm);
         if (elm.key < 15)
         {
             props.getDataBook('works', elm.key)
@@ -39,7 +40,11 @@ const SearchBar = (props) => {
                             <div className={classes.author}>Автор: {u.author_name}</div>
                         </div>
                     </div>)}
-                    <ModalWindow active={props.modalActive} setActive={props.updateModalActive} dataBook={props.dataSelectedBook} />
+                    <ModalWindow active={props.modalActive}
+                                 setActive={props.updateModalActive}
+                                 dataBook={props.dataSelectedBook}
+                                 dataBook2={dataBook}
+                                 dataAuthor={props.dataAuthor} />
                 </div>
                 :
                 <div>пусто</div>
